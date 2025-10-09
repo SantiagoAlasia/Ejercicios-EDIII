@@ -16,14 +16,15 @@ Cada ejercicio aborda diferentes **periféricos y conceptos fundamentales** de l
 
 La estructura general del repositorio es la siguiente:
 <div>
-📂 Ejercicios-EDIII/ </br>
-├── 📁 Ejercicio_01_GPIO/</br>
-│ └── main.c</br>
-├── 📁 Ejercicio_02_Timer/</br>
-├── 📁 Ejercicio_03_ADC/</br>
-├── 📁 Ejercicio_04_DAC/</br>
-├── 📁 Ejercicio_05_DMA/</br>
-└── README.md</br>
+📂 Ejercicios-EDIII/ <br>
+├── 📁 Ejercicio_01_GPIO/<br>
+│  ├── Ejemplo1.c<br>
+│  └── Ejemplo2.c<br>
+├── 📁 Ejercicio_02_Timer/<br>
+├── 📁 Ejercicio_03_ADC/<br>
+├── 📁 Ejercicio_04_DAC/<br>
+├── 📁 Ejercicio_05_DMA/<br>
+└── README.md<br>
 </div>
 
 ---
