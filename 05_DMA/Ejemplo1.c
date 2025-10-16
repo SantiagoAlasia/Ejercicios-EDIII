@@ -48,8 +48,8 @@ void cfgDMA(void){
     cfgADC_LLI0_CH0.Control = (ADC_BUFFER_SIZE << 0)      //Tamaño de la transferencia de la LLI
                             | (2 << 18)                   //Ancho de la transferencia Fuente (32 bit)
                             | (2 << 21)                   //Ancho de la transferencia Destino (32 bit)
-                            | (1 << 27)                   //DI=0: Sin incremento de la direccion de destino
-                            & ~(1 << 26);                 //SI=1: Con incremento de la direccion de fuente
+                            | (1 << 27)                   //DI=1: Con incremento de la direccion de destino
+                            & ~(1 << 26);                 //SI=0: Sin incremento de la direccion de fuente
 
     cfgADC_DMA_CH0.ChannelNum = 0;    //Seleccion del canal de transferencia
     cfgADC_DMA_CH0.SrcConn = GPDMA_CONN_ADC;    //Periferico de fuente de datos

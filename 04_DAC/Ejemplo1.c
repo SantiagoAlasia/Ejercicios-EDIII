@@ -21,7 +21,6 @@ void cfgGPIO(void);
 void cfgTimer(void);
 void cfgDAC(void);
 void cfgWaveForm(void);
-
 int main(void){
 
     cfgWaveForm();
@@ -30,10 +29,8 @@ int main(void){
     cfgTimer();    //Importante configurarlo desp para que no dispare la conversion antes q este todo listo
 
     while(1){}
-
     return 0;
 }
-
 void cfgGPIO(void){
     PINSEL_CFG_Type cfgPinMAT0_CH0;    //Configuracion del p1.28
     PINSEL_CFG_Type cfgPinDAC;         //COnfiguracion del p0.26
@@ -44,18 +41,16 @@ void cfgGPIO(void){
     cfgPinMAT0_CH0.Pinmode = PINSEL_ṔINMODE_TRISTATE;
     cfgPinMAT0_CH0.OpenDrain = PINSEL_PINMODE_NORMAL;
 
-    cfgPinMAT0_CH0.Portnum = PINSEL_PORT_0;
-    cfgPinMAT0_CH0.Pinnum = PINSEL_PIN_26;
-    cfgPinMAT0_CH0.Funcnum = PINSEL_FUNC_2; //Funcionalidad DAC
-    cfgPinMAT0_CH0.Pinmode = PINSEL_ṔINMODE_TRISTATE;
-    cfgPinMAT0_CH0.OpenDrain = PINSEL_PINMODE_NORMAL;
+    cfgPinDAC.Portnum = PINSEL_PORT_0;
+    cfgPinDAC.Pinnum = PINSEL_PIN_26;
+    cfgPinDAC.Funcnum = PINSEL_FUNC_2; //Funcionalidad DAC
+    cfgPinDAC.Pinmode = PINSEL_ṔINMODE_TRISTATE;
+    cfgPinDAC.OpenDrain = PINSEL_PINMODE_NORMAL;
 
     PINSEL_configPin(&cfgPinMAT0_CH0);
     PINSEL_configPin(&cfgPinDAC);
-
     return;
 }
-
 void cfgTimer(void){
     TIM_TIMERCFG_Type cfgTimerMode;
     TIM_MATCHCFG_Type cfgTimerMatch;
@@ -75,25 +70,19 @@ void cfgTimer(void){
     TIM_Cmd(LPC_TIM0, ENABLE); //Habilitacion de cuenta de TMR0
 
     NVIC_EnableIRQ(TIMER0_IRQn);
-
     return;
 }
-
 void cfgDAC(void){
     DAC_Init(LPC_DAC); //Inicializacion del DAC
-
     return;
 }
-
 void cfgWaveForm(void){
     //Generacion de rampa lineal
     for(uint16_t i = 0; i < NUM_WAVE_SAMPLES; i++){
         WaveForm[i] = i;
     }
-
     return;
 }
-
 void TIMER0_IRQHandler(void){
     if(TIM_GetIntStatus(LPC_TIM0, TIM_MR0_INT)){  //Consulta por la interrupcion por MR0
         static uint16_t indexWave = 0;
@@ -102,6 +91,5 @@ void TIMER0_IRQHandler(void){
 
         TIM_ClearIntPending(LPC_TIM0, TIM_MR0_INT); //Limpia bandera de interrupcion por TMR0
     }
-
     return;
 }

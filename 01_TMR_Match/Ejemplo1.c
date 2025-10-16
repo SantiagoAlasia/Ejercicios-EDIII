@@ -1,6 +1,7 @@
 /*
  * @brief Enciende y apaga un led conectado en p0.22 de forma intermitente
  * cada 1s debido a la interrupción de TMR.
+ * @note El timer interrumpe al llegar al valor de match (Asi se configuro)
  */
 
 # include "LPC17xx.h"

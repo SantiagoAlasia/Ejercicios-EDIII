@@ -51,7 +51,7 @@ void cfgGPIO(void){
 
 void cfgTimer(void){
     TIM_COUNTERCFG_Type cfgTimerMode; //Configuracion de Timer en modo temporizador
-    TIM_MATCHCFG_Type cfgTimerCapture; //Configuracion de los eventos de Capture 0
+    TIM_CAPTURECFG_Type cfgTimerCapture; //Configuracion de los eventos de Capture 0
 
     cfgTimerMode.CountInputSelect = TIM_COUNTER_INCAP0; //Pin de entrada CAP0.0 para TMR0
 
@@ -81,7 +81,7 @@ void TIMER0_IRQHandler(void){
             //Calcula la diferencia de ticks entre dos capturas
             uint32_t diffTicks = (currCapValue - lastCapValue); //Ticks transcurridos entre dos eventos
 
-            float tickTime = 1.0f / 25000000.0f
+            float tickTime = 1.0f / 25000000.0f //Considerando que CCLK = 100MHz => PCLK = CCLK/4 = 25MHz => Cada tick es de 40ns
             float diffTime = diffTicks * tickTime;
 
             if(diffTime >= 1.0f){
@@ -92,8 +92,6 @@ void TIMER0_IRQHandler(void){
             lastCapValue = currCapValue;
         }
     }
-
     TIM_ClearIntPending(LPC_TIM0, TIM_CR0_INT); //Limpio la bandera de la interrupcion por TMR0
-
     return;
 }
